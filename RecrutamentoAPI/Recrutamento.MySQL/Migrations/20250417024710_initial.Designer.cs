@@ -12,7 +12,7 @@ using Recrutamento.MySQL.MySQL;
 namespace Recrutamento.MySQL.Migrations
 {
     [DbContext(typeof(MySQLContext))]
-    [Migration("20250415194434_initial")]
+    [Migration("20250417024710_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -62,11 +62,11 @@ namespace Recrutamento.MySQL.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CandidatoId")
-                        .HasColumnType("int");
+                    b.Property<DateOnly>("DataFim")
+                        .HasColumnType("date");
 
-                    b.Property<DateTime>("DataInicio")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly>("DataInicio")
+                        .HasColumnType("date");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -76,8 +76,6 @@ namespace Recrutamento.MySQL.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CandidatoId");
 
                     b.HasIndex("VagaId");
 
@@ -96,7 +94,10 @@ namespace Recrutamento.MySQL.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Localizacao")
+                    b.Property<decimal>("Salario")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -111,31 +112,13 @@ namespace Recrutamento.MySQL.Migrations
 
             modelBuilder.Entity("Recrutamento.Domain.Entities.ProcessoSeletivo", b =>
                 {
-                    b.HasOne("Recrutamento.Domain.Entities.Candidato", "Candidato")
-                        .WithMany("ProcessosSeletivos")
-                        .HasForeignKey("CandidatoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Recrutamento.Domain.Entities.Vaga", "Vaga")
-                        .WithMany("ProcessosSeletivos")
+                        .WithMany()
                         .HasForeignKey("VagaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Candidato");
-
                     b.Navigation("Vaga");
-                });
-
-            modelBuilder.Entity("Recrutamento.Domain.Entities.Candidato", b =>
-                {
-                    b.Navigation("ProcessosSeletivos");
-                });
-
-            modelBuilder.Entity("Recrutamento.Domain.Entities.Vaga", b =>
-                {
-                    b.Navigation("ProcessosSeletivos");
                 });
 #pragma warning restore 612, 618
         }

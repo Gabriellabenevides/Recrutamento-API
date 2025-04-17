@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35919.96 d17.13
+VisualStudioVersion = 17.13.35919.96
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecrutamentoAPI", "RecrutamentoAPI\RecrutamentoAPI.csproj", "{36CB618C-B117-4EE5-816C-2BA934D4355B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recutamento.Domain", "Recutamento.Domain\Recutamento.Domain.csproj", "{A495C652-61B4-4C56-8775-F805D5B26B92}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recrutamento.Domain", "Recutamento.Domain\Recrutamento.Domain.csproj", "{A495C652-61B4-4C56-8775-F805D5B26B92}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recrutamento.Application", "Recrutamento.Application\Recrutamento.Application.csproj", "{8758B615-C9D3-4D00-886C-EA9C6C035C9D}"
 EndProject
