@@ -46,8 +46,9 @@ namespace Recrutamento.MySQL.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Descricao = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Localizacao = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    Status = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Salario = table.Column<decimal>(type: "decimal(65,30)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -61,21 +62,15 @@ namespace Recrutamento.MySQL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    DataInicio = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    DataInicio = table.Column<DateOnly>(type: "date", nullable: false),
+                    DataFim = table.Column<DateOnly>(type: "date", nullable: false),
                     Status = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CandidatoId = table.Column<int>(type: "int", nullable: false),
                     VagaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProcessoSeletivos", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ProcessoSeletivos_Candidatos_CandidatoId",
-                        column: x => x.CandidatoId,
-                        principalTable: "Candidatos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ProcessoSeletivos_Vagas_VagaId",
                         column: x => x.VagaId,
@@ -84,11 +79,6 @@ namespace Recrutamento.MySQL.Migrations
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProcessoSeletivos_CandidatoId",
-                table: "ProcessoSeletivos",
-                column: "CandidatoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProcessoSeletivos_VagaId",
@@ -100,10 +90,10 @@ namespace Recrutamento.MySQL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ProcessoSeletivos");
+                name: "Candidatos");
 
             migrationBuilder.DropTable(
-                name: "Candidatos");
+                name: "ProcessoSeletivos");
 
             migrationBuilder.DropTable(
                 name: "Vagas");

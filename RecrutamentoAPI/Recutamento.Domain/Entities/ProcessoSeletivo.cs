@@ -1,13 +1,26 @@
-﻿namespace Recrutamento.Domain.Entities
+﻿using System.Text.Json.Serialization;
+
+namespace Recrutamento.Domain.Entities;
+
+public class ProcessoSeletivo
 {
-    public class ProcessoSeletivo
+    [JsonIgnore]
+    public int Id { get; set; }
+    public DateOnly DataInicio { get; set; }
+    public DateOnly DataFim { get; set; }
+    public string Status { get; set; }
+    public int VagaId { get; set; }
+    [JsonIgnore]
+
+    public virtual Vaga Vaga { get; set; }
+
+    public ProcessoSeletivo() { }
+
+    public ProcessoSeletivo(DateOnly dataInicio, DateOnly dataFim, string status, int vagaId)
     {
-        public int Id { get; set; }
-        public DateTime DataInicio { get; set; }
-        public string Status { get; set; }
-        public int CandidatoId { get; set; }
-        public Candidato Candidato { get; set; }
-        public int VagaId { get; set; }
-        public Vaga Vaga { get; set; }
+        DataInicio = dataInicio;
+        DataFim = dataFim;
+        Status = status;
+        VagaId = vagaId;
     }
 }

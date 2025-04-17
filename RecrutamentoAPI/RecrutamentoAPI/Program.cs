@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Recrutamento.API.Extensions.SwaggerConfigurations;
+using Recrutamento.Application;
+using Recrutamento.Application.Handlers.CandidatoHandlers;
+using Recrutamento.MySQL;
 using Recrutamento.MySQL.MySQL;
 
 namespace Recrutamento.API;
@@ -13,10 +16,10 @@ public static class Program
         // Configuração de serviços
         builder.Services
             .AddSwaggerConfig(builder.Configuration)
-            //.AddApplication(builder.Configuration)
+            .AddApplication(builder.Configuration)
             .AddControllers();
 
-        //builder.Services.AddRepository(builder.Configuration);
+        builder.Services.AddRepository(builder.Configuration);
 
 
         var connectionString = builder.Configuration.GetConnectionString("RHConnection");
@@ -24,7 +27,7 @@ public static class Program
         builder.Services.AddDbContext<MySQLContext>(options =>
             options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-        //builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(IncluirCargoHandler).Assembly));
+        builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(IncluirCandidatoHandler).Assembly));
 
         builder.Services.AddSwaggerConfig(builder.Configuration).AddControllers();
 
